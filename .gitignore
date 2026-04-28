@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Model files (very large)
+*.pth
+
+# Dataset folders / files
+dataset/
+dataset_split/
+*.zip
+
+# Processed data folders
+preprocessed/
+cleaned/
+fullcleaned/
+
+# Uploads (user images)
+static/uploads/
+
+# IDE / system files
+.vscode/
+.DS_Store
