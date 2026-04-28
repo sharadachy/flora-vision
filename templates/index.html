@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🌿 Floravision - Plant Classifier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">🌿 Floravision</div>
+    <nav>
+         <a href="{{ url_for('home') }}">Home</a>
+         <a href="{{ url_for('identify') }}">Identify</a>
+         <a href="{{ url_for('about') }}">About</a>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <h1>🌸 Floravision</h1>
+    <p class="subtitle">Upload a flower image to identify its species</p>
+
+    <!-- Upload Form -->
+    <form action="/predict" method="POST" enctype="multipart/form-data" id="upload-form">
+
+        <div class="upload-box" id="drop-area">
+            <div class="upload-content">
+                <div class="upload-icon">📸</div>
+                <p>Select or drop a flower photo</p>
+               
+            </div>
+
+            <input type="file" name="image" id="fileInput" accept="image/*" required>
+            <img id="preview" src="#" alt="Preview" style="display:none;">
+        </div>
+
+        <button type="submit" id="detectBtn">🌿 Detect Plant</button>
+    </form>
+
+    <!-- Error -->
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Prediction Result -->
+    {% if flower_name %}
+    <div class="result">
+
+        <h2>🌼 Prediction Result</h2>
+
+        {% if image_file %}
+            <img src="{{ url_for('static', filename='uploads/' + image_file) }}" 
+                 alt="Uploaded Image">
+        {% endif %}
+
+        <h3>{{ flower_name }}</h3>
+
+        {% if flower_info %}
+            {% for key, value in flower_info.items() %}
+                <p><strong>{{ key }}:</strong> {{ value }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <a href="/">
+            <button type="button">Upload Another Image</button>
+        </a>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    const dropArea = document.getElementById("drop-area");
+    const fileInput = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+    const detectBtn = document.getElementById("detectBtn");
+
+    dropArea.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", function(event) {
+        if (event.target.files.length > 0) showPreview(event.target.files[0]);
+    });
+
+    dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropArea.classList.add("dragover");
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("dragover");
+    });
+
+    dropArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropArea.classList.remove("dragover");
+        if (e.dataTransfer.files.length > 0) {
+            fileInput.files = e.dataTransfer.files;
+            showPreview(e.dataTransfer.files[0]);
+        }
+    });
+
+    function showPreview(file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        dropArea.querySelector(".upload-content").style.display = "none";
+    }
+
+    document.getElementById("upload-form").addEventListener("submit", function() {
+        detectBtn.innerHTML = "⏳ Detecting...";
+        detectBtn.disabled = true;
+    });
+</script>
+
+<footer>
+<p>© 2026 Floravision | AI Flower Identifier 🌿</p>
+</footer>
+</body>
+</html>

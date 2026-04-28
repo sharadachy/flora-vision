@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Floravision | AI Plant Identifier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(to bottom,#f2f8f2,#e4f1e4);
+color:#2e4d2e;
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-weight:700;
+font-size:22px;
+color:#2f6b2f;
+}
+
+.nav-links{
+list-style:none;
+display:flex;
+gap:30px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+.nav-links a:hover{
+color:#2f8f2f;
+}
+
+.hero{
+display:flex;
+justify-content:center;
+padding:80px 20px;
+}
+
+.hero-card{
+background:white;
+padding:50px;
+border-radius:25px;
+text-align:center;
+width:100%;
+max-width:750px;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+.hero-card h1{
+font-size:40px;
+color:#2f6b2f;
+}
+
+.subtitle{
+margin-top:15px;
+font-size:18px;
+}
+
+.description{
+margin:15px 0 30px;
+font-size:15px;
+color:#555;
+}
+
+.btn-primary{
+display:inline-block;
+padding:14px 35px;
+background:#2f8f2f;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:600;
+}
+
+.btn-primary:hover{
+background:#256f25;
+}
+
+.section{
+padding:70px 8%;
+text-align:center;
+}
+
+.light-bg{
+background:#f7fbf7;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.icon{
+font-size:35px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.gallery-card{
+background:white;
+padding:15px;
+border-radius:20px;
+box-shadow:0 6px 15px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.gallery-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.gallery-card p{
+margin-top:10px;
+font-weight:600;
+}
+
+.gallery-card:hover{
+transform:scale(1.05);
+}
+
+.image-card img{
+width:100%;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.highlight{
+color:#2f8f2f;
+font-weight:600;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:white;
+margin-top:50px;
+}
+
+@media(max-width:768px){
+.hero-card{padding:30px;}
+.hero-card h1{font-size:28px;}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">🌿 Floravision</div>
+<ul class="nav-links">
+<li><a href="/">Home</a></li>
+<li><a href="/identify">Identify</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+</nav>
+
+
+<section class="section light-bg">
+<h2>🌿 Nepali Flowers</h2>
+<div class="gallery">
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/godawari.png') }}">
+<p>Godawari</p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gulab.png') }}">
+<p>Gulab</p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/japakusum.png') }}">
+<p>Japakusum</p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/lalupatey.png') }}">
+<p>Lalupatey</p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/makhamali.png') }}">
+<p>Makhamali</p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/sui.png') }}">
+<p>Sui Ful </p>
+</div>
+
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/gg.png') }}">
+<p>Gulbahar </p>
+</div>
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/bbb.png') }}">
+<p>Baganbilas</p>
+</div>
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/thulo.png') }}">
+<p>Thulo Lwang </p>
+</div>
+<div class="gallery-card">
+<img src="{{ url_for('static', filename='images/sai.png') }}">
+<p>Saipatri</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<h2>How It Works</h2>
+<div class="cards">
+<div class="card">
+<div class="icon">📷</div>
+<h3>Upload Image</h3>
+<p>Take or select a photo of the plant.</p>
+</div>
+
+<div class="card">
+<div class="icon">🤖</div>
+<h3>AI Analyzes</h3>
+<p>CNN model processes the image.</p>
+</div>
+
+<div class="card">
+<div class="icon">🌼</div>
+<h3>Get Details</h3>
+<p>Receive plant name instantly.</p>
+</div>
+</div>
+</section>
+
+<section class="section light-bg">
+<h2>Why Floravision?</h2>
+<div class="cards">
+<div class="card"><h3>High Accuracy</h3></div>
+<div class="card"><h3>Fast Detection</h3></div>
+<div class="card"><h3>Clean UI</h3></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Sample Predictions</h2>
+<div class="cards">
+
+<div class="card image-card">
+<img src="{{ url_for('static', filename='images/gulab.png') }}">
+<h3>Gulab</h3>
+<p>Confidence: <span class="highlight">92.76%</span></p>
+</div>
+
+<div class="card image-card">
+<img src="{{ url_for('static', filename='images/sai.png') }}">
+<h3>Saipatri</h3>
+<p>Confidence: <span class="highlight">93%</span></p>
+</div>
+
+<div class="card image-card">
+<img src="{{ url_for('static', filename='images/makhamali.png') }}">
+<h3>Makhamali</h3>
+<p>Confidence: <span class="highlight">94.52%</span></p>
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>© 2026 Floravision | AI Flower Identifier 🌿</p>
+</footer>
+
+</body>
+</html>
